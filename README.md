@@ -1,4 +1,4 @@
-[Walrus Plus](https://i.imgur.com/TfYcInM.png)
+![Walrus Plus]([https://i.imgur.com/TfYcInM.png](https://i.imgur.com/HpPNcIp.png))
 
 The _new and imporved_ Walrus reverse shell, packed with new features. This fixes a majority of major bugs in **Walrus**
 
